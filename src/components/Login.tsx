@@ -11,8 +11,31 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [postoName, setPostoName] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Base de dados fictícia de usuários e seus postos
+  const userPostoDatabase = {
+    "admin": "Posto eFleet",
+    "gerente": "Posto eFleet",
+    "operador": "Posto eFleet",
+    "joão": "Posto eFleet",
+    "maria": "Posto Petrobras",
+    "carlos": "Posto Shell"
+  };
+
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
+    
+    // Buscar posto vinculado ao usuário
+    const lowerUsername = value.toLowerCase();
+    if (userPostoDatabase[lowerUsername]) {
+      setPostoName(userPostoDatabase[lowerUsername]);
+    } else if (value.length === 0) {
+      setPostoName("");
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +46,7 @@ const Login = () => {
       if (username && password) {
         toast({
           title: "Login realizado com sucesso!",
-          description: "Bem-vindo ao Posto Portal",
+          description: `Bem-vindo ao ${postoName || "sistema"}`,
         });
         navigate("/dashboard");
       } else {
@@ -47,8 +70,12 @@ const Login = () => {
             </div>
           </div>
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold text-primary">Posto Portal</h1>
-            <p className="text-muted-foreground">Sistema de Gestão Integrada</p>
+            <h1 className="text-2xl font-bold text-primary">
+              {postoName || "POSTO"}
+            </h1>
+            {postoName && (
+              <p className="text-muted-foreground">Sistema de Gestão</p>
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -62,7 +89,7 @@ const Login = () => {
                   type="text"
                   placeholder="Digite seu usuário"
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => handleUsernameChange(e.target.value)}
                   className="pl-10 input-portal"
                 />
               </div>
