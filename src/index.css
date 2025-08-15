@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sistema de Design Posto Portal - Cores em HSL */
+/* Sistema de Design Posto eFleet - Cores em HSL */
 
 @layer base {
   :root {
-    /* Cores principais do Posto Portal */
+    /* Cores principais do Posto eFleet */
     --background: 225 32% 86%; /* #d9ddec - Light blue background */
     --foreground: 225 50% 20%; /* Text color - dark blue */
 
@@ -114,7 +114,7 @@
 }
 
 @layer components {
-  /* Componentes customizados do Posto Portal */
+  /* Componentes customizados do Posto eFleet */
   .card-portal {
     @apply bg-card rounded-lg shadow-[var(--shadow-card)] border border-border;
   }

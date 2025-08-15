@@ -103,7 +103,7 @@ const Dashboard = () => {
                   <Fuel className="w-5 h-5 text-accent-foreground" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold">Posto Portal</h2>
+                  <h2 className="text-lg font-bold">Posto eFleet</h2>
                   <p className="text-xs text-primary-foreground/70">Sistema de Gestão</p>
                 </div>
               </div>
@@ -176,9 +176,21 @@ const Dashboard = () => {
         {/* Top Bar */}
         <div className="h-16 bg-card border-b border-border flex items-center justify-between px-6">
           <div>
-            <h1 className="text-xl font-semibold text-foreground">
-              {isDashboardHome ? "Dashboard Principal" : menuItems.find(item => location.pathname === item.path)?.title}
-            </h1>
+            <div className="flex items-center space-x-4">
+              <h1 className="text-xl font-semibold text-foreground">
+                {isDashboardHome ? "Dashboard Principal" : menuItems.find(item => location.pathname === item.path)?.title}
+              </h1>
+              {!isDashboardHome && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/dashboard")}
+                  className="text-sm"
+                >
+                  ← Voltar ao Dashboard
+                </Button>
+              )}
+            </div>
             <p className="text-sm text-muted-foreground">
               {isDashboardHome ? "Visão geral do sistema" : "Gestão e controle"}
             </p>
@@ -239,11 +251,11 @@ const DashboardHome = () => {
         
         <Card className="card-portal">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Estoque Crítico</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Clientes Ativos</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">3 itens</div>
-            <p className="text-xs text-muted-foreground">Requer atenção</p>
+            <div className="text-2xl font-bold text-foreground">1.247</div>
+            <p className="text-xs text-accent">+15.3% este mês</p>
           </CardContent>
         </Card>
       </div>
@@ -295,7 +307,7 @@ const DashboardHome = () => {
             <div className="flex items-center space-x-3">
               <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
               <div className="text-sm">
-                <p className="font-medium">Estoque baixo detectado</p>
+                <p className="font-medium">Cliente cadastrado</p>
                 <p className="text-muted-foreground text-xs">há 1h</p>
               </div>
             </div>
