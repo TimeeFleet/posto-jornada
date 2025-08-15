@@ -279,47 +279,6 @@ const OrganizacaoOperacao = () => {
         </CardContent>
       </Card>
 
-      {/* Informações Job to be Done, Dores e Ganhos */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-6 border-l-4 border-destructive bg-red-50 card-portal">
-          <h4 className="font-semibold text-destructive flex items-center mb-3">
-            <AlertTriangle className="w-5 h-5 mr-2" />
-            Principais Dores
-          </h4>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Perdas de prazo por falta de organização</li>
-            <li>• Dificuldade em priorizar tarefas críticas</li>
-            <li>• Comunicação falha com gestores</li>
-            <li>• Retrabalho por falta de visibilidade</li>
-          </ul>
-        </div>
-
-        <div className="p-6 border-l-4 border-accent bg-green-50 card-portal">
-          <h4 className="font-semibold text-accent flex items-center mb-3">
-            <CheckCircle className="w-5 h-5 mr-2" />
-            Principais Ganhos
-          </h4>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Visualização clara de todas as pendências</li>
-            <li>• Priorização automática por criticidade</li>
-            <li>• Alertas proativos sobre prazos</li>
-            <li>• Gestão eficiente do tempo</li>
-          </ul>
-        </div>
-
-        <div className="p-6 border-l-4 border-blue-500 bg-blue-50 card-portal">
-          <h4 className="font-semibold text-blue-600 flex items-center mb-3">
-            <TrendingUp className="w-5 h-5 mr-2" />
-            Job to be Done
-          </h4>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Organizar operação de forma eficiente</li>
-            <li>• Garantir cumprimento de prazos</li>
-            <li>• Facilitar tomada de decisões</li>
-            <li>• Melhorar comunicação da equipe</li>
-          </ul>
-        </div>
-      </div>
     </div>
   );
 };

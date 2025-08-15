@@ -88,35 +88,6 @@ const ProcessoAbastecimento = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border-l-4 border-destructive bg-red-50">
-                <h4 className="font-semibold text-destructive flex items-center">
-                  <XCircle className="w-4 h-4 mr-2" />
-                  Dor
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Demora na identificação do cliente e veículo
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-accent bg-green-50">
-                <h4 className="font-semibold text-accent flex items-center">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
-                  Ganho
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Identificação rápida e segura do cliente
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                <h4 className="font-semibold text-blue-600 flex items-center">
-                  <Car className="w-4 h-4 mr-2" />
-                  Job to be Done
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Validar cliente e autorizar abastecimento
-                </p>
-              </div>
-            </div>
           </div>
         );
 
@@ -159,35 +130,6 @@ const ProcessoAbastecimento = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border-l-4 border-destructive bg-red-50">
-                <h4 className="font-semibold text-destructive flex items-center">
-                  <XCircle className="w-4 h-4 mr-2" />
-                  Dor
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Processo manual de autenticação
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-accent bg-green-50">
-                <h4 className="font-semibold text-accent flex items-center">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
-                  Ganho
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Autorização automática e segura
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                <h4 className="font-semibold text-blue-600 flex items-center">
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Job to be Done
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Autenticar motorista no sistema
-                </p>
-              </div>
-            </div>
           </div>
         );
 
@@ -245,35 +187,6 @@ const ProcessoAbastecimento = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border-l-4 border-destructive bg-red-50">
-                <h4 className="font-semibold text-destructive flex items-center">
-                  <XCircle className="w-4 h-4 mr-2" />
-                  Dor
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Erro na conferência de dados
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-accent bg-green-50">
-                <h4 className="font-semibold text-accent flex items-center">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
-                  Ganho
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Abastecimento rápido e seguro
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                <h4 className="font-semibold text-blue-600 flex items-center">
-                  <Clock className="w-4 h-4 mr-2" />
-                  Job to be Done
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Realizar abastecimento com precisão
-                </p>
-              </div>
-            </div>
           </div>
         );
 
@@ -312,35 +225,6 @@ const ProcessoAbastecimento = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border-l-4 border-destructive bg-red-50">
-                <h4 className="font-semibold text-destructive flex items-center">
-                  <XCircle className="w-4 h-4 mr-2" />
-                  Dor
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Demora no registro e emissão de NF
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-accent bg-green-50">
-                <h4 className="font-semibold text-accent flex items-center">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
-                  Ganho
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Registro automático e NF instantânea
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                <h4 className="font-semibold text-blue-600 flex items-center">
-                  <FileText className="w-4 h-4 mr-2" />
-                  Job to be Done
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Finalizar venda e emitir documentos
-                </p>
-              </div>
-            </div>
           </div>
         );
 
@@ -375,35 +259,6 @@ const ProcessoAbastecimento = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border-l-4 border-destructive bg-red-50">
-                <h4 className="font-semibold text-destructive flex items-center">
-                  <XCircle className="w-4 h-4 mr-2" />
-                  Dor
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Cliente sai sem comprovante
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-accent bg-green-50">
-                <h4 className="font-semibold text-accent flex items-center">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
-                  Ganho
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Cliente satisfeito e documentado
-                </p>
-              </div>
-              <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                <h4 className="font-semibold text-blue-600 flex items-center">
-                  <TrendingUp className="w-4 h-4 mr-2" />
-                  Job to be Done
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Garantir satisfação e compliance
-                </p>
-              </div>
-            </div>
 
             <div className="flex space-x-3">
               <Button onClick={handleReset} variant="outline" className="flex-1">

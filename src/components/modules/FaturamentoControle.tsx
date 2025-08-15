@@ -154,36 +154,6 @@ const FaturamentoControle = () => {
                   ))}
                 </div>
 
-                {/* Painel de Ganhos e Dores */}
-                <div className="space-y-4">
-                  <div className="p-4 border-l-4 border-destructive bg-red-50">
-                    <h4 className="font-semibold text-destructive flex items-center">
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Dor
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Erro na emissão manual de notas fiscais
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-accent bg-green-50">
-                    <h4 className="font-semibold text-accent flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Ganho
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Emissão automática com revisão dupla
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                    <h4 className="font-semibold text-blue-600 flex items-center">
-                      <FileText className="w-4 h-4 mr-2" />
-                      Job to be Done
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Emitir NFs corretas e completas
-                    </p>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>
@@ -251,35 +221,6 @@ const FaturamentoControle = () => {
                   </CardContent>
                 </Card>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 border-l-4 border-destructive bg-red-50">
-                    <h4 className="font-semibold text-destructive flex items-center">
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Dor
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      XML não corresponde à venda
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-accent bg-green-50">
-                    <h4 className="font-semibold text-accent flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Ganho
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Validação automática de correspondência
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                    <h4 className="font-semibold text-blue-600 flex items-center">
-                      <Upload className="w-4 h-4 mr-2" />
-                      Job to be Done
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Anexar XML correto à NF
-                    </p>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>
@@ -352,35 +293,6 @@ const FaturamentoControle = () => {
                   </Card>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 border-l-4 border-destructive bg-red-50">
-                    <h4 className="font-semibold text-destructive flex items-center">
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Dor
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Divergências não identificadas
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-accent bg-green-50">
-                    <h4 className="font-semibold text-accent flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Ganho
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Identificação automática de problemas
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                    <h4 className="font-semibold text-blue-600 flex items-center">
-                      <RefreshCw className="w-4 h-4 mr-2" />
-                      Job to be Done
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Garantir consistência dos dados
-                    </p>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>

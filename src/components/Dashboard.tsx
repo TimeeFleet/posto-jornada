@@ -29,79 +29,79 @@ const menuItems = [
     title: "Processo de abastecimento",
     path: "/dashboard/abastecimento",
     icon: Fuel,
-    color: "bg-blue-500",
+    color: "bg-white/20",
   },
   {
     title: "Faturamento e controle",
     path: "/dashboard/faturamento",
     icon: FileText,
-    color: "bg-green-500",
+    color: "bg-white/20",
   },
   {
     title: "Envio de documentos",
     path: "/dashboard/documentos",
     icon: Upload,
-    color: "bg-purple-500",
+    color: "bg-white/20",
   },
   {
     title: "Organização da operação",
     path: "/dashboard/operacao",
     icon: Settings,
-    color: "bg-orange-500",
+    color: "bg-white/20",
   },
   {
     title: "Gestão de campanhas e promoções",
     path: "/dashboard/campanhas",
     icon: Megaphone,
-    color: "bg-pink-500",
+    color: "bg-white/20",
   },
   {
     title: "Gestão de indicadores e resultados",
     path: "/dashboard/indicadores",
     icon: BarChart3,
-    color: "bg-indigo-500",
+    color: "bg-white/20",
   },
   {
     title: "Controle de estoque",
     path: "/dashboard/estoque",
     icon: Package,
-    color: "bg-yellow-500",
+    color: "bg-white/20",
   },
   {
     title: "Gestão financeira",
     path: "/dashboard/financeiro",
     icon: CreditCard,
-    color: "bg-red-500",
+    color: "bg-white/20",
   },
   {
     title: "Cadastro de clientes",
     path: "/dashboard/clientes",
     icon: Users,
-    color: "bg-cyan-500",
+    color: "bg-white/20",
   },
   {
     title: "Manutenção de equipamentos",
     path: "/dashboard/manutencao",
     icon: Wrench,
-    color: "bg-gray-500",
+    color: "bg-white/20",
   },
   {
     title: "Agenda e eventos",
     path: "/dashboard/agenda",
     icon: Calendar,
-    color: "bg-emerald-500",
+    color: "bg-white/20",
   },
   {
     title: "Segurança e conformidade",
     path: "/dashboard/seguranca",
     icon: Shield,
-    color: "bg-amber-500",
+    color: "bg-white/20",
   },
   {
     title: "Relatórios gerenciais",
     path: "/dashboard/relatorios",
     icon: FileBarChart,
-    color: "bg-violet-500",
+    color: "bg-white/20",
   },
 ];
 
@@ -294,7 +294,7 @@ const DashboardHome = () => {
                   onClick={() => window.location.href = item.path}
                 >
                   <div className={`w-8 h-8 rounded-md ${item.color} flex items-center justify-center`}>
-                    <item.icon className="w-4 h-4 text-white" />
+                    <item.icon className="w-4 h-4 text-primary-foreground" />
                   </div>
                   <span className="text-xs text-center">{item.title}</span>
                 </Button>
