@@ -362,35 +362,6 @@ const FaturamentoControle = () => {
                   <Button className="button-portal">Fechar Dia</Button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 border-l-4 border-destructive bg-red-50">
-                    <h4 className="font-semibold text-destructive flex items-center">
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Dor
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Fechamento manual demorado
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-accent bg-green-50">
-                    <h4 className="font-semibold text-accent flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Ganho
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Fechamento automático com checklist
-                    </p>
-                  </div>
-                  <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                    <h4 className="font-semibold text-blue-600 flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      Job to be Done
-                    </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Encerrar operações com segurança
-                    </p>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>
