@@ -18,20 +18,22 @@ const Login = () => {
   // Base de dados fictícia de usuários e seus postos
   const userPostoDatabase = {
     "admin": "Posto eFleet",
-    "gerente": "Posto eFleet",
+    "gerente": "Posto eFleet", 
     "operador": "Posto eFleet",
     "joão": "Posto eFleet",
     "maria": "Posto Petrobras",
     "carlos": "Posto Shell"
   };
 
-  const handleUsernameChange = (value: string) => {
-    setUsername(value);
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
     
-    // Buscar posto vinculado ao usuário
-    const lowerUsername = value.toLowerCase();
-    if (userPostoDatabase[lowerUsername]) {
-      setPostoName(userPostoDatabase[lowerUsername]);
+    // Quando começar a digitar a senha, mostrar o posto vinculado
+    if (value.length > 0 && username) {
+      const lowerUsername = username.toLowerCase();
+      if (userPostoDatabase[lowerUsername]) {
+        setPostoName(userPostoDatabase[lowerUsername]);
+      }
     } else if (value.length === 0) {
       setPostoName("");
     }
@@ -73,9 +75,7 @@ const Login = () => {
             <h1 className="text-2xl font-bold text-primary">
               {postoName || "POSTO"}
             </h1>
-            {postoName && (
-              <p className="text-muted-foreground">Sistema de Gestão</p>
-            )}
+            <p className="text-muted-foreground">Sistema de Gestão Integrada</p>
           </div>
         </CardHeader>
         <CardContent>
@@ -89,7 +89,7 @@ const Login = () => {
                   type="text"
                   placeholder="Digite seu usuário"
                   value={username}
-                  onChange={(e) => handleUsernameChange(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="pl-10 input-portal"
                 />
               </div>
@@ -103,7 +103,7 @@ const Login = () => {
                   type="password"
                   placeholder="Digite sua senha"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
                   className="pl-10 input-portal"
                 />
               </div>
