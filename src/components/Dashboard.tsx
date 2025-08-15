@@ -38,12 +38,6 @@ const menuItems = [
     color: "bg-white/20",
   },
   {
-    title: "Envio de documentos",
-    path: "/dashboard/documentos",
-    icon: Upload,
-    color: "bg-white/20",
-  },
-  {
     title: "Organização da operação",
     path: "/dashboard/operacao",
     icon: Settings,
@@ -62,12 +56,6 @@ const menuItems = [
     color: "bg-white/20",
   },
   {
-    title: "Controle de estoque",
-    path: "/dashboard/estoque",
-    icon: Package,
-    color: "bg-white/20",
-  },
-  {
     title: "Gestão financeira",
     path: "/dashboard/financeiro",
     icon: CreditCard,
@@ -77,24 +65,6 @@ const menuItems = [
     title: "Cadastro de clientes",
     path: "/dashboard/clientes",
     icon: Users,
-    color: "bg-white/20",
-  },
-  {
-    title: "Manutenção de equipamentos",
-    path: "/dashboard/manutencao",
-    icon: Wrench,
-    color: "bg-white/20",
-  },
-  {
-    title: "Agenda e eventos",
-    path: "/dashboard/agenda",
-    icon: Calendar,
-    color: "bg-white/20",
-  },
-  {
-    title: "Segurança e conformidade",
-    path: "/dashboard/seguranca",
-    icon: Shield,
     color: "bg-white/20",
   },
   {

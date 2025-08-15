@@ -8,6 +8,11 @@ import Dashboard from "./components/Dashboard";
 import ProcessoAbastecimento from "./components/modules/ProcessoAbastecimento";
 import FaturamentoControle from "./components/modules/FaturamentoControle";
 import OrganizacaoOperacao from "./components/modules/OrganizacaoOperacao";
+import GestaoCampanhas from "./components/modules/GestaoCampanhas";
+import GestaoIndicadores from "./components/modules/GestaoIndicadores";
+import GestaoFinanceira from "./components/modules/GestaoFinanceira";
+import CadastroClientes from "./components/modules/CadastroClientes";
+import RelatoriosGerenciais from "./components/modules/RelatoriosGerenciais";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +29,11 @@ const App = () => (
             <Route path="abastecimento" element={<ProcessoAbastecimento />} />
             <Route path="faturamento" element={<FaturamentoControle />} />
             <Route path="operacao" element={<OrganizacaoOperacao />} />
+            <Route path="campanhas" element={<GestaoCampanhas />} />
+            <Route path="indicadores" element={<GestaoIndicadores />} />
+            <Route path="financeiro" element={<GestaoFinanceira />} />
+            <Route path="clientes" element={<CadastroClientes />} />
+            <Route path="relatorios" element={<RelatoriosGerenciais />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
