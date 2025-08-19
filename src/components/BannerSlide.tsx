@@ -44,7 +44,7 @@ const BannerSlide = () => {
   };
 
   return (
-    <div className="relative w-full h-40 rounded-lg overflow-hidden bg-gradient-to-r from-primary to-accent">
+    <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-b from-primary to-accent">
       <div className="relative w-full h-full">
         <div 
           className="flex transition-transform duration-500 ease-in-out h-full"
@@ -53,11 +53,11 @@ const BannerSlide = () => {
           {banners.map((banner) => (
             <div
               key={banner.id}
-              className="min-w-full h-full flex items-center justify-center p-4 text-center"
+              className="min-w-full h-full flex flex-col items-center justify-center p-6 text-center"
             >
               <div className="text-primary-foreground">
-                <h3 className="font-bold text-lg mb-2">{banner.title}</h3>
-                <p className="text-sm opacity-90">{banner.description}</p>
+                <h3 className="font-bold text-xl mb-3">{banner.title}</h3>
+                <p className="text-base opacity-90 leading-relaxed">{banner.description}</p>
               </div>
             </div>
           ))}

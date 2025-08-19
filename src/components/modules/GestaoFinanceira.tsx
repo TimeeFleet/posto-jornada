@@ -53,20 +53,18 @@ const GestaoFinanceira = () => {
         <Card className="card-portal">
           <CardHeader>
             <CardTitle>Fluxo de Caixa</CardTitle>
-            <CardDescription>Receitas, despesas e lucro nos últimos 6 meses</CardDescription>
+            <CardDescription>Receitas nos últimos 6 meses</CardDescription>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={fluxoCaixa}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="mes" />
-                <YAxis />
-                <Tooltip formatter={(value) => `R$ ${value.toLocaleString()}`} />
-                <Line type="monotone" dataKey="receita" stroke="#90b531" strokeWidth={2} name="Receita" />
-                <Line type="monotone" dataKey="despesa" stroke="#ff4444" strokeWidth={2} name="Despesa" />
-                <Line type="monotone" dataKey="lucro" stroke="#303762" strokeWidth={3} name="Lucro" />
-              </LineChart>
-            </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={fluxoCaixa}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="mes" />
+              <YAxis />
+              <Tooltip formatter={(value) => `R$ ${value.toLocaleString()}`} />
+              <Line type="monotone" dataKey="receita" stroke="#90b531" strokeWidth={3} name="Receita" />
+            </LineChart>
+          </ResponsiveContainer>
           </CardContent>
         </Card>
 
@@ -101,24 +99,23 @@ const GestaoFinanceira = () => {
         </Card>
       </div>
 
-      <Card className="card-portal">
-        <CardHeader>
-          <CardTitle>Comparativo Mensal</CardTitle>
-          <CardDescription>Receitas e despesas por mês</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={fluxoCaixa}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="mes" />
-              <YAxis />
-              <Tooltip formatter={(value) => `R$ ${value.toLocaleString()}`} />
-              <Bar dataKey="receita" fill="#90b531" name="Receita" />
-              <Bar dataKey="despesa" fill="#ff4444" name="Despesa" />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+        <Card className="card-portal">
+          <CardHeader>
+            <CardTitle>Comparativo Mensal</CardTitle>
+            <CardDescription>Receitas por mês</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={fluxoCaixa}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="mes" />
+                <YAxis />
+                <Tooltip formatter={(value) => `R$ ${value.toLocaleString()}`} />
+                <Bar dataKey="receita" fill="#90b531" name="Receita" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
     </div>
   );
 };
