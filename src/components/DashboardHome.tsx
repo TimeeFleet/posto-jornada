@@ -97,7 +97,7 @@ const DashboardHome = () => {
                 <Button
                   key={index}
                   variant="outline"
-                  className="h-20 flex flex-col space-y-2 hover:bg-accent/10"
+                  className="h-20 flex flex-col space-y-2 hover:bg-primary hover:text-primary-foreground transition-colors"
                   onClick={() => window.location.href = item.path}
                 >
                   <div className={`w-8 h-8 rounded-md ${item.color} flex items-center justify-center`}>
@@ -130,10 +130,10 @@ const DashboardHome = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
               <div className="text-sm">
-                <p className="font-medium">Cliente cadastrado</p>
-                <p className="text-muted-foreground text-xs">há 1h</p>
+                <p className="font-medium">Relatório gerado</p>
+                <p className="text-muted-foreground text-xs">há 2h</p>
               </div>
             </div>
           </CardContent>

@@ -205,14 +205,20 @@ const ProcessoAbastecimento = () => {
             </div>
             
             {formData.matricula && formData.senha && (
-              <Card className="card-portal">
+              <Card className="card-portal bg-accent/10 border-accent">
                 <CardHeader>
                   <CardTitle className="text-sm">Status da Autorização</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-accent" />
-                    <span className="text-sm">Motorista autorizado para abastecimento</span>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="w-5 h-5 text-accent" />
+                      <span className="text-sm">Motorista autorizado para abastecimento</span>
+                    </div>
+                    <div className="bg-background p-3 rounded-lg border">
+                      <p className="font-medium text-sm text-foreground">João Silva Santos</p>
+                      <p className="text-xs text-muted-foreground">Motorista habilitado - CNH: 123456789</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -296,8 +302,12 @@ const ProcessoAbastecimento = () => {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label>Número da NF</Label>
-                    <Input value="000123456" readOnly className="input-portal" />
+                    <Label>Número de Autorização</Label>
+                    <Input value="AUT789456123" readOnly className="input-portal" />
+                  </div>
+                  <div>
+                    <Label>Número do Doc (NSU)</Label>
+                    <Input value="NSU001234567" readOnly className="input-portal" />
                   </div>
                   <div>
                     <Label>Data/Hora</Label>
@@ -318,6 +328,63 @@ const ProcessoAbastecimento = () => {
                     </label>
                   </div>
                 </div>
+
+                {/* Comprovante físico */}
+                <Card className="card-portal bg-accent/5 border-accent/20">
+                  <CardHeader>
+                    <CardTitle className="text-sm">Comprovante de Abastecimento</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm">
+                    <div className="text-center border-b pb-2 mb-2">
+                      <p className="font-bold">Posto eFleet</p>
+                      <p className="text-xs">Sistema de Gestão</p>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex justify-between">
+                        <span>Placa:</span>
+                        <span className="font-medium">{formData.placa}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Empresa:</span>
+                        <span className="font-medium">{formData.empresa}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Combustível:</span>
+                        <span className="font-medium">{formData.combustivel}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Litros:</span>
+                        <span className="font-medium">{formData.litros.toFixed(2)} L</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Preço/L:</span>
+                        <span className="font-medium">R$ {formData.precoLitro.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between border-t pt-2 font-bold">
+                        <span>Total:</span>
+                        <span>R$ {formData.valorTotal.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>NSU:</span>
+                        <span>NSU001234567</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Autorização:</span>
+                        <span>AUT789456123</span>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2 mt-4">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <FileText className="w-4 h-4 mr-2" />
+                        Imprimir
+                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <FileText className="w-4 h-4 mr-2" />
+                        Baixar PDF
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </CardContent>
             </Card>
           </div>

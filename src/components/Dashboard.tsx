@@ -23,6 +23,8 @@ import {
   User,
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import WhatsAppFloat from "./WhatsAppFloat";
+import BannerSlide from "./BannerSlide";
 
 const menuItems = [
   {
@@ -127,6 +129,13 @@ const Dashboard = () => {
               );
             })}
           </div>
+
+          {/* Banners Section */}
+          {sidebarOpen && (
+            <div className="mt-6 px-2">
+              <BannerSlide />
+            </div>
+          )}
         </ScrollArea>
 
         {/* User Section */}
@@ -189,9 +198,11 @@ const Dashboard = () => {
           <Outlet />
         </div>
       </div>
+      
+      {/* WhatsApp Float Button */}
+      <WhatsAppFloat />
     </div>
   );
 };
-
 
 export default Dashboard;

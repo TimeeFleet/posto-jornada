@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { 
   CreditCard, 
@@ -33,21 +34,11 @@ const GestaoFinanceira = () => {
           <CardDescription>Controle financeiro e fluxo de caixa</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="text-center p-4 border rounded-lg">
               <CreditCard className="w-8 h-8 text-accent mx-auto mb-2" />
               <h3 className="font-semibold">Receita Total</h3>
               <p className="text-xl font-bold text-accent">R$ 485.320,00</p>
-            </div>
-            <div className="text-center p-4 border rounded-lg">
-              <DollarSign className="w-8 h-8 text-accent mx-auto mb-2" />
-              <h3 className="font-semibold">Despesas</h3>
-              <p className="text-xl font-bold text-destructive">R$ 287.450,00</p>
-            </div>
-            <div className="text-center p-4 border rounded-lg">
-              <TrendingUp className="w-8 h-8 text-accent mx-auto mb-2" />
-              <h3 className="font-semibold">Lucro Líquido</h3>
-              <p className="text-xl font-bold text-accent">R$ 197.870,00</p>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <AlertCircle className="w-8 h-8 text-orange-500 mx-auto mb-2" />
@@ -82,17 +73,27 @@ const GestaoFinanceira = () => {
         <Card className="card-portal">
           <CardHeader>
             <CardTitle>Contas a Receber</CardTitle>
-            <CardDescription>Valores pendentes de clientes</CardDescription>
+            <CardDescription>Valores pendentes de clientes - Somente visualização</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {contasReceber.map((conta, index) => (
                 <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
-                  <div>
+                  <div className="flex-1">
                     <p className="font-medium">{conta.cliente}</p>
                     <p className="text-sm text-muted-foreground">Vencimento: {conta.vencimento}</p>
                   </div>
-                  <p className="font-bold text-orange-500">R$ {conta.valor.toLocaleString()}</p>
+                  <div className="flex items-center space-x-2">
+                    <p className="font-bold text-orange-500">R$ {conta.valor.toLocaleString()}</p>
+                    <div className="flex space-x-1">
+                      <Button variant="outline" size="sm" className="text-xs">
+                        Detalhes
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-xs">
+                        Comprovante
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
