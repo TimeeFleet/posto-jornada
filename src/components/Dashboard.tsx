@@ -32,15 +32,9 @@ const menuItems = [
     color: "bg-white/20",
   },
   {
-    title: "Faturamento e controle",
-    path: "/dashboard/faturamento",
+    title: "Recolha de NF",
+    path: "/dashboard/recolha-nf",
     icon: FileText,
-    color: "bg-white/20",
-  },
-  {
-    title: "Organização da operação",
-    path: "/dashboard/operacao",
-    icon: Settings,
     color: "bg-white/20",
   },
   {

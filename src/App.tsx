@@ -6,8 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import ProcessoAbastecimento from "./components/modules/ProcessoAbastecimento";
-import FaturamentoControle from "./components/modules/FaturamentoControle";
-import OrganizacaoOperacao from "./components/modules/OrganizacaoOperacao";
+import RecolhaNF from "./components/modules/RecolhaNF";
 import GestaoCampanhas from "./components/modules/GestaoCampanhas";
 import GestaoIndicadores from "./components/modules/GestaoIndicadores";
 import GestaoFinanceira from "./components/modules/GestaoFinanceira";
@@ -27,8 +26,7 @@ const App = () => (
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="abastecimento" element={<ProcessoAbastecimento />} />
-            <Route path="faturamento" element={<FaturamentoControle />} />
-            <Route path="operacao" element={<OrganizacaoOperacao />} />
+            <Route path="recolha-nf" element={<RecolhaNF />} />
             <Route path="campanhas" element={<GestaoCampanhas />} />
             <Route path="indicadores" element={<GestaoIndicadores />} />
             <Route path="financeiro" element={<GestaoFinanceira />} />
