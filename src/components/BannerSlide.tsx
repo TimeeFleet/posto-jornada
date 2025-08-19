@@ -44,7 +44,7 @@ const BannerSlide = () => {
   };
 
   return (
-    <div className="relative w-full h-80 rounded-xl overflow-hidden bg-gradient-to-b from-primary via-primary/90 to-accent shadow-lg">
+    <div className="relative w-full h-96 rounded-xl overflow-hidden bg-gradient-to-b from-primary via-primary/90 to-accent shadow-lg" style={{ aspectRatio: '9/16', height: '400px' }}>
       <div className="relative w-full h-full">
         <div 
           className="flex transition-transform duration-500 ease-in-out h-full"
