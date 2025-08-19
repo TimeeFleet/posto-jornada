@@ -38,12 +38,6 @@ const menuItems = [
     color: "bg-white/20",
   },
   {
-    title: "Gestão de campanhas e promoções",
-    path: "/dashboard/campanhas",
-    icon: Megaphone,
-    color: "bg-white/20",
-  },
-  {
     title: "Gestão de indicadores e resultados",
     path: "/dashboard/indicadores",
     icon: BarChart3,
@@ -53,18 +47,6 @@ const menuItems = [
     title: "Gestão financeira",
     path: "/dashboard/financeiro",
     icon: CreditCard,
-    color: "bg-white/20",
-  },
-  {
-    title: "Cadastro de clientes",
-    path: "/dashboard/clientes",
-    icon: Users,
-    color: "bg-white/20",
-  },
-  {
-    title: "Relatórios gerenciais",
-    path: "/dashboard/relatorios",
-    icon: FileBarChart,
     color: "bg-white/20",
   },
 ];
@@ -262,7 +244,7 @@ const DashboardHome = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {menuItems.slice(0, 6).map((item, index) => (
+              {menuItems.map((item, index) => (
                 <Button
                   key={index}
                   variant="outline"
