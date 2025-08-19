@@ -44,7 +44,7 @@ const BannerSlide = () => {
   };
 
   return (
-    <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-b from-primary to-accent">
+    <div className="relative w-full h-80 rounded-xl overflow-hidden bg-gradient-to-b from-primary via-primary/90 to-accent shadow-lg">
       <div className="relative w-full h-full">
         <div 
           className="flex transition-transform duration-500 ease-in-out h-full"
@@ -53,12 +53,18 @@ const BannerSlide = () => {
           {banners.map((banner) => (
             <div
               key={banner.id}
-              className="min-w-full h-full flex flex-col items-center justify-center p-6 text-center"
+              className="min-w-full h-full flex flex-col items-center justify-center p-8 text-center relative"
             >
-              <div className="text-primary-foreground">
-                <h3 className="font-bold text-xl mb-3">{banner.title}</h3>
-                <p className="text-base opacity-90 leading-relaxed">{banner.description}</p>
+              <div className="text-primary-foreground z-10">
+                <div className="mb-4">
+                  <div className="w-16 h-16 bg-primary-foreground/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-8 h-8 bg-primary-foreground rounded-full"></div>
+                  </div>
+                </div>
+                <h3 className="font-bold text-2xl mb-4 leading-tight">{banner.title}</h3>
+                <p className="text-lg opacity-90 leading-relaxed max-w-xs">{banner.description}</p>
               </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
           ))}
         </div>
@@ -83,15 +89,15 @@ const BannerSlide = () => {
         </Button>
 
         {/* Indicators */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {banners.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentBanner(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentBanner 
-                  ? 'bg-primary-foreground' 
-                  : 'bg-primary-foreground/50'
+                  ? 'bg-primary-foreground scale-110' 
+                  : 'bg-primary-foreground/40'
               }`}
             />
           ))}
