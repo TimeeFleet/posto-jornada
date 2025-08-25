@@ -16,14 +16,13 @@ import {
 } from "lucide-react";
 
 const Transacoes = () => {
-  console.log("Transacoes component is rendering");
   const [filtroData, setFiltroData] = useState("");
   const [filtroPlaca, setFiltroPlaca] = useState("");
   const [filtroCliente, setFiltroCliente] = useState("");
   const [filtroProduto, setFiltroProduto] = useState("");
   const { toast } = useToast();
 
-  // Mock data - 50 últimas transações
+  // Mock data - 50 últimas transações fictícias
   const transacoes = [
     {
       id: "TXN001",
@@ -94,11 +93,50 @@ const Transacoes = () => {
       motorista: "Roberto Lima",
       matricula: "MAT005",
       status: "concluida"
+    },
+    {
+      id: "TXN006",
+      autorizacao: "AUTH2025006",
+      nsu: "NSU123456794",
+      placa: "MNO-2468",
+      cliente: "Cargas Pesadas",
+      produto: "Diesel S-10",
+      litros: 150.0,
+      valor: 900.0,
+      horario: "2025-08-25 09:45:30",
+      motorista: "Pedro Souza",
+      matricula: "MAT006",
+      status: "concluida"
+    },
+    {
+      id: "TXN007",
+      autorizacao: "AUTH2025007",
+      nsu: "NSU123456795",
+      placa: "PQR-1357",
+      cliente: "Transporte Rápido",
+      produto: "Gasolina Aditivada",
+      litros: 55.2,
+      valor: 331.2,
+      horario: "2025-08-25 08:30:20",
+      motorista: "Luiza Ferreira",
+      matricula: "MAT007",
+      status: "concluida"
+    },
+    {
+      id: "TXN008",
+      autorizacao: "AUTH2025008",
+      nsu: "NSU123456796",
+      placa: "STU-9753",
+      cliente: "Frota Sul",
+      produto: "Diesel S-10",
+      litros: 78.9,
+      valor: 473.4,
+      horario: "2025-08-25 07:15:45",
+      motorista: "Ricardo Alves",
+      matricula: "MAT008",
+      status: "concluida"
     }
   ];
-
-  console.log("Transacoes data:", transacoes);
-  console.log("Transacoes length:", transacoes.length);
 
   const handleGerarRelatorio = () => {
     toast({
@@ -218,7 +256,7 @@ const Transacoes = () => {
       {/* Lista de Transações */}
       <Card>
         <CardHeader>
-          <CardTitle>Últimas 50 Transações</CardTitle>
+          <CardTitle>Últimas {transacoes.length} Transações</CardTitle>
           <CardDescription>Para ver transações mais antigas, use os filtros acima</CardDescription>
         </CardHeader>
         <CardContent>
