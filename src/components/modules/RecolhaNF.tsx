@@ -127,39 +127,15 @@ const RecolhaNF = () => {
 
   return (
     <div className="space-y-6">
-      {/* Métricas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Métricas - Removido prioridades */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <AlertTriangle className="w-5 h-5 text-red-500" />
+              <FileText className="w-5 h-5 text-blue-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Críticas</p>
-                <p className="text-2xl font-bold text-red-600">2</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <AlertCircle className="w-5 h-5 text-orange-500" />
-              <div>
-                <p className="text-sm text-muted-foreground">Alta Prioridade</p>
-                <p className="text-2xl font-bold text-orange-600">1</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Clock className="w-5 h-5 text-yellow-500" />
-              <div>
-                <p className="text-sm text-muted-foreground">Média Prioridade</p>
-                <p className="text-2xl font-bold text-yellow-600">1</p>
+                <p className="text-sm text-muted-foreground">Total de NFs</p>
+                <p className="text-2xl font-bold text-blue-600">4</p>
               </div>
             </div>
           </CardContent>
@@ -170,8 +146,8 @@ const RecolhaNF = () => {
             <div className="flex items-center space-x-2">
               <CheckCircle className="w-5 h-5 text-green-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Vencendo Hoje</p>
-                <p className="text-2xl font-bold text-green-600">3</p>
+                <p className="text-sm text-muted-foreground">Processadas Hoje</p>
+                <p className="text-2xl font-bold text-green-600">2</p>
               </div>
             </div>
           </CardContent>
@@ -202,89 +178,68 @@ const RecolhaNF = () => {
 
         <CardContent>
           <Tabs defaultValue="pendencias" className="space-y-4">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="pendencias">Pendências Operacionais</TabsTrigger>
-              <TabsTrigger value="notas">Notas Fiscais</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="pendencias">Notas Fiscais</TabsTrigger>
               <TabsTrigger value="conciliacao">Conciliação</TabsTrigger>
             </TabsList>
 
             <TabsContent value="pendencias" className="space-y-4">
-              {/* Filtros */}
+              {/* Filtros - Removido filtros de prioridade */}
               <div className="flex space-x-2">
-                {["todas", "crítica", "alta", "média"].map((status) => (
-                  <Button
-                    key={status}
-                    variant={filterStatus === status ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setFilterStatus(status)}
-                    className="capitalize"
-                  >
-                    {status === "todas" ? "Todas" : status}
-                  </Button>
-                ))}
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="capitalize"
+                >
+                  Todas as NFs
+                </Button>
               </div>
 
-              {/* Lista de Pendências */}
+              {/* Lista simplificada de NFs para envio */}
               <div className="space-y-3">
-                {filteredPendencias.map((pendencia) => {
-                  const prioridadeConfig = getPrioridadeBadge(pendencia.prioridade);
-                  const PrioridadeIcon = prioridadeConfig.icon;
-
-                  return (
-                    <Card key={pendencia.id} className="border-l-4 border-l-primary">
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <PrioridadeIcon className={`w-5 h-5 ${prioridadeConfig.color}`} />
-                            <div>
-                              <div className="flex items-center space-x-2">
-                                <h4 className="font-medium">{pendencia.tipo}</h4>
-                                <Badge variant={prioridadeConfig.variant}>
-                                  {pendencia.prioridade}
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-muted-foreground">
-                                {pendencia.cliente} • {pendencia.venda} • {pendencia.data}
-                              </p>
-                              <p className="text-sm font-medium">{pendencia.valor}</p>
+                {notasFiscais.map((nf) => (
+                  <Card key={nf.id}>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <FileText className="w-5 h-5 text-blue-600" />
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <h4 className="font-medium">{nf.id}</h4>
+                              {getStatusBadge(nf.status)}
                             </div>
-                          </div>
-
-                          <div className="flex items-center space-x-4">
-                            <div className="text-right">
-                              <p className="text-sm text-muted-foreground">Prazo</p>
-                              <p className="text-sm font-medium">{pendencia.prazo}</p>
-                              <Progress 
-                                value={75} 
-                                className={`w-20 h-2 ${getProgressColor(pendencia.prazo)}`}
-                              />
-                            </div>
-
-                            <div className="flex space-x-2">
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                                onClick={() => handleAlertarGestor(pendencia.id)}
-                              >
-                                Alertar
-                              </Button>
-                              <Button variant="outline" size="sm">
-                                <Eye className="w-4 h-4 mr-1" />
-                                Detalhes
-                              </Button>
-                              <Button 
-                                size="sm"
-                                onClick={() => handleResolverPendencia(pendencia.id)}
-                              >
-                                Resolver
-                              </Button>
-                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {nf.cliente} • {nf.data}
+                            </p>
+                            <p className="text-sm font-medium">{nf.valor}</p>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+
+                        <div className="flex items-center space-x-2">
+                          {!nf.xml && (
+                            <Button variant="outline" size="sm">
+                              <Upload className="w-4 h-4 mr-1" />
+                              XML
+                            </Button>
+                          )}
+                          {nf.status === "pendente" && (
+                            <Button 
+                              size="sm"
+                              onClick={() => handleEnviarNF(nf.id)}
+                            >
+                              Enviar
+                              <ArrowRight className="w-4 h-4 ml-1" />
+                            </Button>
+                          )}
+                          <Button variant="outline" size="sm">
+                            <Eye className="w-4 h-4 mr-1" />
+                            Ver
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 

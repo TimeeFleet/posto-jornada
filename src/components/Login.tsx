@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Fuel, Lock, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import WhatsAppFloat from "./WhatsAppFloat";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -130,6 +131,7 @@ const Login = () => {
           </form>
         </CardContent>
       </Card>
+      <WhatsAppFloat />
     </div>
   );
 };

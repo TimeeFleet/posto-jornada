@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart as RechartsPieChart, Pie, Cell } from 'recharts';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { 
   BarChart3, 
   Users,
@@ -8,12 +11,12 @@ import {
 
 // Dados fictícios para os gráficos
 const vendasMensais = [
-  { mes: 'Jan', vendas: 420000, litros: 85000 },
-  { mes: 'Fev', vendas: 380000, litros: 78000 },
-  { mes: 'Mar', vendas: 450000, litros: 92000 },
-  { mes: 'Abr', vendas: 485000, litros: 98000 },
-  { mes: 'Mai', vendas: 510000, litros: 102000 },
-  { mes: 'Jun', vendas: 485320, litros: 98500 },
+  { mes: 'Jan', vendas: 420000, litros: 85000, diesel: 45000, gasolina: 30000, etanol: 10000 },
+  { mes: 'Fev', vendas: 380000, litros: 78000, diesel: 42000, gasolina: 26000, etanol: 10000 },
+  { mes: 'Mar', vendas: 450000, litros: 92000, diesel: 50000, gasolina: 32000, etanol: 10000 },
+  { mes: 'Abr', vendas: 485000, litros: 98000, diesel: 52000, gasolina: 34000, etanol: 12000 },
+  { mes: 'Mai', vendas: 510000, litros: 102000, diesel: 55000, gasolina: 35000, etanol: 12000 },
+  { mes: 'Jun', vendas: 485320, litros: 98500, diesel: 53000, gasolina: 33500, etanol: 12000 },
 ];
 
 const combustivelData = [
@@ -23,6 +26,25 @@ const combustivelData = [
 ];
 
 const GestaoIndicadores = () => {
+  const [filtroVolume, setFiltroVolume] = useState("total");
+
+  const getVolumeDataKey = () => {
+    switch (filtroVolume) {
+      case "diesel": return "diesel";
+      case "gasolina": return "gasolina";
+      case "etanol": return "etanol";
+      default: return "litros";
+    }
+  };
+
+  const getVolumeLabel = () => {
+    switch (filtroVolume) {
+      case "diesel": return "Diesel";
+      case "gasolina": return "Gasolina";
+      case "etanol": return "Etanol";
+      default: return "Total";
+    }
+  };
   return (
     <div className="space-y-6">
       <Card className="card-portal">
@@ -103,8 +125,26 @@ const GestaoIndicadores = () => {
 
       <Card className="card-portal">
         <CardHeader>
-          <CardTitle>Volume em Litros</CardTitle>
-          <CardDescription>Quantidade de combustível vendida mensalmente</CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle>Volume em Litros</CardTitle>
+              <CardDescription>Quantidade de combustível vendida mensalmente</CardDescription>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="filtro-volume">Filtrar por:</Label>
+              <Select value={filtroVolume} onValueChange={setFiltroVolume}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="Filtro" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="total">Total</SelectItem>
+                  <SelectItem value="diesel">Diesel</SelectItem>
+                  <SelectItem value="gasolina">Gasolina</SelectItem>
+                  <SelectItem value="etanol">Etanol</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
@@ -112,8 +152,8 @@ const GestaoIndicadores = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="mes" />
               <YAxis />
-              <Tooltip formatter={(value) => [`${value.toLocaleString()} L`, 'Litros']} />
-              <Bar dataKey="litros" fill="#303762" />
+              <Tooltip formatter={(value) => [`${value.toLocaleString()} L`, getVolumeLabel()]} />
+              <Bar dataKey={getVolumeDataKey()} fill="#303762" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

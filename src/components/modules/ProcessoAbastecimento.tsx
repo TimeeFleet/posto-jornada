@@ -33,6 +33,7 @@ const cardDatabase = {
 
 const ProcessoAbastecimento = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isPrecoEditavel, setIsPrecoEditavel] = useState(false);
   const [formData, setFormData] = useState({
     placa: "",
     cartao: "",
@@ -106,6 +107,7 @@ const ProcessoAbastecimento = () => {
       description: "Abastecimento registrado com sucesso no sistema.",
     });
     setCurrentStep(1);
+    setIsPrecoEditavel(false);
     setFormData({
       placa: "",
       cartao: "",
@@ -120,17 +122,23 @@ const ProcessoAbastecimento = () => {
   };
 
   const handleNovoAbastecimento = () => {
-    setCurrentStep(1);
+    // Vai direto para a terceira etapa mantendo placa, matrícula e senha
+    setCurrentStep(3);
+    setIsPrecoEditavel(false);
     setFormData({
-      placa: "",
-      cartao: "",
-      empresa: "",
-      matricula: "",
-      senha: "",
+      placa: formData.placa,
+      cartao: formData.cartao,
+      empresa: formData.empresa,
+      matricula: formData.matricula,
+      senha: formData.senha,
       combustivel: "gasolina",
       precoLitro: 5.89,
       litros: 0,
       valorTotal: 0,
+    });
+    toast({
+      title: "Novo Abastecimento",
+      description: "Dados do veículo mantidos. Prossiga com o abastecimento.",
     });
   };
 
@@ -275,9 +283,29 @@ const ProcessoAbastecimento = () => {
                   <span>Bico:</span>
                   <Badge variant="secondary">Bico 06</Badge>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <span>Preço/Litro:</span>
-                  <span className="font-medium">R$ {formData.precoLitro.toFixed(2)}</span>
+                  <div className="flex items-center space-x-2">
+                    {isPrecoEditavel ? (
+                      <Input
+                        type="number"
+                        step="0.01"
+                        value={formData.precoLitro}
+                        onChange={(e) => setFormData({ ...formData, precoLitro: parseFloat(e.target.value) || 0 })}
+                        className="w-20 h-6 text-sm"
+                      />
+                    ) : (
+                      <span className="font-medium">R$ {formData.precoLitro.toFixed(2)}</span>
+                    )}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setIsPrecoEditavel(!isPrecoEditavel)}
+                      className="h-6 px-2 text-xs"
+                    >
+                      {isPrecoEditavel ? "OK" : "Editar"}
+                    </Button>
+                  </div>
                 </div>
                 <div className="flex justify-between">
                   <span>Litros:</span>
@@ -435,7 +463,7 @@ const ProcessoAbastecimento = () => {
 
             <div className="flex space-x-3">
               <Button onClick={handleNovoAbastecimento} variant="outline" className="flex-1">
-                Novo Abastecimento
+                Novo abastecimento para o mesmo veículo?
               </Button>
               <Button onClick={handleFinalizarAtendimento} className="button-portal flex-1">
                 Finalizar Atendimento

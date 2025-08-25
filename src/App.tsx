@@ -10,6 +10,7 @@ import ProcessoAbastecimento from "./components/modules/ProcessoAbastecimento";
 import RecolhaNF from "./components/modules/RecolhaNF";
 import GestaoIndicadores from "./components/modules/GestaoIndicadores";
 import GestaoFinanceira from "./components/modules/GestaoFinanceira";
+import NegociacaoDesconto from "./components/modules/NegociacaoDesconto";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="recolha-nf" element={<RecolhaNF />} />
             <Route path="indicadores" element={<GestaoIndicadores />} />
             <Route path="financeiro" element={<GestaoFinanceira />} />
+            <Route path="negociacao-desconto" element={<NegociacaoDesconto />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

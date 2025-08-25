@@ -57,6 +57,12 @@ const menuItems = [
     icon: CreditCard,
     color: "bg-white/20",
   },
+  {
+    title: "Negociação de Desconto",
+    path: "/dashboard/negociacao-desconto",
+    icon: Package,
+    color: "bg-white/20",
+  },
 ];
 
 const Dashboard = () => {
