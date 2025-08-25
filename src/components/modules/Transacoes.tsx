@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 const Transacoes = () => {
+  console.log("Transacoes component is rendering");
   const [filtroData, setFiltroData] = useState("");
   const [filtroPlaca, setFiltroPlaca] = useState("");
   const [filtroCliente, setFiltroCliente] = useState("");
@@ -95,6 +96,9 @@ const Transacoes = () => {
       status: "concluida"
     }
   ];
+
+  console.log("Transacoes data:", transacoes);
+  console.log("Transacoes length:", transacoes.length);
 
   const handleGerarRelatorio = () => {
     toast({
