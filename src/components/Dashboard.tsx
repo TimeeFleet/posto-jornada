@@ -63,6 +63,12 @@ const menuItems = [
     icon: Package,
     color: "bg-white/20",
   },
+  {
+    title: "Transações",
+    path: "/dashboard/transacoes",
+    icon: FileBarChart,
+    color: "bg-white/20",
+  },
 ];
 
 const Dashboard = () => {

@@ -200,7 +200,7 @@ const NegociacaoDesconto = () => {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="percentual" id="percentual" />
-                      <Label htmlFor="percentual">Percentagem de Desconto</Label>
+                      <Label htmlFor="percentual">Porcentagem de Desconto</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="centavos" id="centavos" />

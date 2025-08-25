@@ -19,10 +19,12 @@ const fluxoCaixa = [
 ];
 
 const contasReceber = [
-  { cliente: 'Transportes Silva LTDA', valor: 15420, vencimento: '20/08/2025' },
-  { cliente: 'Logística Express', valor: 8750, vencimento: '22/08/2025' },
-  { cliente: 'Frota Norte', valor: 12500, vencimento: '25/08/2025' },
-  { cliente: 'Fast Delivery', valor: 8560, vencimento: '28/08/2025' },
+  { cliente: 'Transportes Silva LTDA', valor: 15420, vencimento: '20/08/2025', status: 'pendente' },
+  { cliente: 'Logística Express', valor: 8750, vencimento: '22/08/2025', status: 'pendente' },
+  { cliente: 'Frota Norte', valor: 12500, vencimento: '25/08/2025', status: 'pendente' },
+  { cliente: 'Fast Delivery', valor: 8560, vencimento: '28/08/2025', status: 'pendente' },
+  { cliente: 'Rápido Transporte', valor: 18750, vencimento: '15/08/2025', status: 'pago' },
+  { cliente: 'Via Express', valor: 12300, vencimento: '10/08/2025', status: 'pago' },
 ];
 
 const GestaoFinanceira = () => {
@@ -87,9 +89,11 @@ const GestaoFinanceira = () => {
                       <Button variant="outline" size="sm" className="text-xs">
                         Detalhes
                       </Button>
-                      <Button variant="outline" size="sm" className="text-xs">
-                        Comprovante
-                      </Button>
+                      {conta.status === 'pago' && (
+                        <Button variant="outline" size="sm" className="text-xs">
+                          Comprovante
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
