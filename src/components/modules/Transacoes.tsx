@@ -19,7 +19,7 @@ const Transacoes = () => {
   const [filtroData, setFiltroData] = useState("");
   const [filtroPlaca, setFiltroPlaca] = useState("");
   const [filtroCliente, setFiltroCliente] = useState("");
-  const [filtroProduto, setFiltroProduto] = useState("");
+  const [filtroProduto, setFiltroProduto] = useState("todos");
   const { toast } = useToast();
 
   // Mock data - 50 últimas transações fictícias
@@ -163,7 +163,7 @@ const Transacoes = () => {
     setFiltroData("");
     setFiltroPlaca("");
     setFiltroCliente("");  
-    setFiltroProduto("");
+    setFiltroProduto("todos");
     toast({
       title: "Filtros Limpos",
       description: "Todos os filtros foram removidos.",
@@ -231,7 +231,7 @@ const Transacoes = () => {
                   <SelectValue placeholder="Todos os produtos" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todos os produtos</SelectItem>
+                  <SelectItem value="todos">Todos os produtos</SelectItem>
                   <SelectItem value="diesel-s10">Diesel S-10</SelectItem>
                   <SelectItem value="gasolina-comum">Gasolina Comum</SelectItem>
                   <SelectItem value="etanol">Etanol</SelectItem>
