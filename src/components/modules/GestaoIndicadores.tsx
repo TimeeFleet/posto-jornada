@@ -3,10 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart as RechartsPieChart, Pie, Cell } from 'recharts';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { 
   BarChart3, 
   Users,
-  TrendingUp
+  TrendingUp,
+  FileText,
+  FileSpreadsheet
 } from "lucide-react";
 
 // Dados fictícios para os gráficos
@@ -25,8 +29,20 @@ const combustivelData = [
   { name: 'Etanol', value: 20, color: '#d9ddec' },
 ];
 
+const clientes = [
+  "Todos os Clientes",
+  "Transportadora ABC",
+  "Logística XYZ",
+  "Frota Beta",
+  "Expresso Delta",
+  "Transporte Omega"
+];
+
 const GestaoIndicadores = () => {
   const [filtroVolume, setFiltroVolume] = useState("total");
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
+  const [clienteSelecionado, setClienteSelecionado] = useState("Todos os Clientes");
 
   const getVolumeDataKey = () => {
     switch (filtroVolume) {
@@ -49,8 +65,71 @@ const GestaoIndicadores = () => {
     <div className="space-y-6">
       <Card className="card-portal">
         <CardHeader>
-          <CardTitle>Gestão de Indicadores e Resultados</CardTitle>
-          <CardDescription>Acompanhe os principais indicadores de performance</CardDescription>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <CardTitle>Gestão de Indicadores e Resultados</CardTitle>
+              <CardDescription>Acompanhe os principais indicadores de performance</CardDescription>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm" className="gap-2">
+                <FileText className="w-4 h-4" />
+                Exportar PDF
+              </Button>
+              <Button variant="outline" size="sm" className="gap-2">
+                <FileSpreadsheet className="w-4 h-4" />
+                Exportar Excel
+              </Button>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-4 bg-muted/50 rounded-lg">
+            <div className="space-y-2">
+              <Label htmlFor="data-inicio">Data Início</Label>
+              <Input
+                id="data-inicio"
+                type="date"
+                value={dataInicio}
+                onChange={(e) => setDataInicio(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="data-fim">Data Fim</Label>
+              <Input
+                id="data-fim"
+                type="date"
+                value={dataFim}
+                onChange={(e) => setDataFim(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cliente">Cliente</Label>
+              <Select value={clienteSelecionado} onValueChange={setClienteSelecionado}>
+                <SelectTrigger id="cliente">
+                  <SelectValue placeholder="Selecione o cliente" />
+                </SelectTrigger>
+                <SelectContent>
+                  {clientes.map((cliente) => (
+                    <SelectItem key={cliente} value={cliente}>
+                      {cliente}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-end">
+              <Button className="w-full">
+                Aplicar Filtros
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="card-portal">
+        <CardHeader>
+          <CardTitle>Indicadores Principais</CardTitle>
+          <CardDescription>Resumo do período selecionado</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
