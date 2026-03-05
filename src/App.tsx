@@ -6,12 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import DashboardHome from "./components/DashboardHome";
+import ProtectedRoute from "./components/ProtectedRoute";
 import ProcessoAbastecimento from "./components/modules/ProcessoAbastecimento";
 import RecolhaNF from "./components/modules/RecolhaNF";
 import GestaoIndicadores from "./components/modules/GestaoIndicadores";
 import GestaoFinanceira from "./components/modules/GestaoFinanceira";
 import NegociacaoDesconto from "./components/modules/NegociacaoDesconto";
 import Transacoes from "./components/modules/Transacoes";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,7 +26,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
             <Route index element={<ProcessoAbastecimento />} />
             <Route path="home" element={<DashboardHome />} />
             <Route path="abastecimento" element={<ProcessoAbastecimento />} />
@@ -34,7 +37,6 @@ const App = () => (
             <Route path="negociacao-desconto" element={<NegociacaoDesconto />} />
             <Route path="transacoes" element={<Transacoes />} />
           </Route>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
