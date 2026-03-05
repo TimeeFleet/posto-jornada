@@ -34,6 +34,8 @@ const cardDatabase = {
 const ProcessoAbastecimento = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPrecoEditavel, setIsPrecoEditavel] = useState(false);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simulationField, setSimulationField] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     placa: "",
     cartao: "",
@@ -46,6 +48,84 @@ const ProcessoAbastecimento = () => {
     valorTotal: 0,
   });
   const { toast } = useToast();
+
+  // Simulação automática do processo completo
+  const startSimulation = async () => {
+    setIsSimulating(true);
+    setCurrentStep(1);
+    setFormData({
+      placa: "", cartao: "", empresa: "", matricula: "", senha: "",
+      combustivel: "gasolina", precoLitro: 5.89, litros: 0, valorTotal: 0,
+    });
+
+    const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
+    const typeText = async (field: string, text: string, updater: (val: string) => void) => {
+      setSimulationField(field);
+      for (let i = 1; i <= text.length; i++) {
+        updater(text.slice(0, i));
+        await delay(80);
+      }
+      setSimulationField(null);
+      await delay(400);
+    };
+
+    // Etapa 1 - Placa
+    await delay(600);
+    await typeText("placa", "ABC1234", (val) => {
+      const upper = val.toUpperCase();
+      if (vehicleDatabase[upper]) {
+        setFormData(prev => ({
+          ...prev, placa: upper,
+          cartao: vehicleDatabase[upper].cartao,
+          empresa: vehicleDatabase[upper].empresa,
+        }));
+      } else {
+        setFormData(prev => ({ ...prev, placa: val }));
+      }
+    });
+    await delay(800);
+
+    toast({ title: "Etapa 1 concluída!", description: "Veículo identificado com sucesso." });
+    setCurrentStep(2);
+    await delay(1000);
+
+    // Etapa 2 - Matrícula e Senha
+    await typeText("matricula", "12345", (val) =>
+      setFormData(prev => ({ ...prev, matricula: val }))
+    );
+    await typeText("senha", "****", (val) =>
+      setFormData(prev => ({ ...prev, senha: val }))
+    );
+    await delay(800);
+
+    toast({ title: "Etapa 2 concluída!", description: "Motorista autenticado." });
+    setCurrentStep(3);
+    await delay(1000);
+
+    // Etapa 3 - Combustível e litros
+    setFormData(prev => ({ ...prev, combustivel: "diesel-s10" }));
+    await delay(600);
+    const targetLitros = 45.5;
+    for (let i = 0; i <= targetLitros; i += 5) {
+      const litros = Math.min(i, targetLitros);
+      setFormData(prev => ({ ...prev, litros, valorTotal: litros * prev.precoLitro }));
+      await delay(120);
+    }
+    setFormData(prev => ({ ...prev, litros: targetLitros, valorTotal: targetLitros * prev.precoLitro }));
+    await delay(800);
+
+    toast({ title: "Etapa 3 concluída!", description: "Abastecimento realizado." });
+    setCurrentStep(4);
+    await delay(1500);
+
+    // Etapa 4 - Finalização
+    toast({ title: "Etapa 4 concluída!", description: "Registro e comprovante gerados." });
+    setCurrentStep(5);
+    await delay(500);
+
+    toast({ title: "✅ Simulação concluída!", description: "Todas as etapas foram percorridas com sucesso." });
+    setIsSimulating(false);
+  };
 
   const steps = [
     { id: 1, title: "Atendimento ao motorista", description: "Identificação do veículo" },
@@ -155,7 +235,8 @@ const ProcessoAbastecimento = () => {
                   placeholder="ABC-1234"
                   value={formData.placa}
                   onChange={(e) => handlePlacaChange(e.target.value)}
-                  className="input-portal"
+                  className={`input-portal transition-all duration-300 ${simulationField === 'placa' ? 'ring-2 ring-accent shadow-md' : ''}`}
+                  readOnly={isSimulating}
                 />
               </div>
               <div>
@@ -165,7 +246,8 @@ const ProcessoAbastecimento = () => {
                   placeholder="1234 5678 9012 3456"
                   value={formData.cartao}
                   onChange={(e) => handleCartaoChange(e.target.value)}
-                  className="input-portal"
+                  className={`input-portal transition-all duration-300 ${simulationField === 'cartao' ? 'ring-2 ring-accent shadow-md' : ''}`}
+                  readOnly={isSimulating}
                 />
               </div>
               {formData.empresa && (
@@ -196,7 +278,8 @@ const ProcessoAbastecimento = () => {
                   placeholder="12345"
                   value={formData.matricula}
                   onChange={(e) => setFormData({ ...formData, matricula: e.target.value })}
-                  className="input-portal"
+                  className={`input-portal transition-all duration-300 ${simulationField === 'matricula' ? 'ring-2 ring-accent shadow-md' : ''}`}
+                  readOnly={isSimulating}
                 />
               </div>
               <div>
@@ -207,7 +290,8 @@ const ProcessoAbastecimento = () => {
                   placeholder="****"
                   value={formData.senha}
                   onChange={(e) => setFormData({ ...formData, senha: e.target.value })}
-                  className="input-portal"
+                  className={`input-portal transition-all duration-300 ${simulationField === 'senha' ? 'ring-2 ring-accent shadow-md' : ''}`}
+                  readOnly={isSimulating}
                 />
               </div>
             </div>
@@ -421,7 +505,7 @@ const ProcessoAbastecimento = () => {
       case 5:
         return (
           <div className="space-y-6">
-            <Card className="card-portal bg-green-50 border-accent">
+            <Card className="card-portal bg-accent/10 border-accent">
               <CardHeader>
                 <CardTitle className="text-accent flex items-center">
                   <CheckCircle className="w-5 h-5 mr-2" />
@@ -482,8 +566,30 @@ const ProcessoAbastecimento = () => {
       {/* Progress Steps */}
       <Card className="card-portal">
         <CardHeader>
-          <CardTitle>Processo de Abastecimento</CardTitle>
-          <CardDescription>Siga os passos para um atendimento completo e eficiente</CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle>Processo de Abastecimento</CardTitle>
+              <CardDescription>Siga os passos para um atendimento completo e eficiente</CardDescription>
+            </div>
+            <Button
+              onClick={startSimulation}
+              disabled={isSimulating}
+              variant="outline"
+              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {isSimulating ? (
+                <>
+                  <Clock className="w-4 h-4 mr-2 animate-spin" />
+                  Simulando...
+                </>
+              ) : (
+                <>
+                  <TrendingUp className="w-4 h-4 mr-2" />
+                  Simular Abastecimento
+                </>
+              )}
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between mb-8">
