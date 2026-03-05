@@ -1,6 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useUserRole } from "@/hooks/useUserRole";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
@@ -90,7 +91,28 @@ const Dashboard = () => {
 
   const isDashboardHome = location.pathname === "/dashboard/home";
 
-  const handleLogout = () => {
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUserEmail(session.user.email || "");
+        const { data } = await supabase
+          .from("profiles")
+          .select("nome")
+          .eq("id", session.user.id)
+          .maybeSingle();
+        if (data?.nome) setUserName(data.nome);
+        else setUserName(session.user.email?.split("@")[0] || "Usuário");
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     navigate("/");
   };
 
@@ -170,8 +192,8 @@ const Dashboard = () => {
             </div>
             {sidebarOpen && (
               <div className="flex-1">
-                <p className="text-sm font-medium text-primary-foreground">João Silva</p>
-                <p className="text-xs text-primary-foreground/70">Gerente</p>
+                <p className="text-sm font-medium text-primary-foreground">{userName}</p>
+                <p className="text-xs text-primary-foreground/70">{role === "gerente" ? "Gerente" : role === "caixa" ? "Caixa" : "Usuário"}</p>
               </div>
             )}
             <Button
