@@ -4,12 +4,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { AlertTriangle, CheckCircle, Clock, FileText, Upload, RefreshCw, BarChart3, AlertCircle, Eye, ArrowRight } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { AlertTriangle, CheckCircle, Clock, FileText, Upload, RefreshCw, BarChart3, AlertCircle, Eye, ArrowRight, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const RecolhaNF = () => {
-  const [selectedNF, setSelectedNF] = useState(null);
+  const [selectedNF, setSelectedNF] = useState<string | null>(null);
   const [filterStatus, setFilterStatus] = useState("todas");
+  const [reportOpen, setReportOpen] = useState(false);
   const { toast } = useToast();
 
   // Dados de notas fiscais
@@ -168,7 +171,7 @@ const RecolhaNF = () => {
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Atualizar
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => setReportOpen(true)}>
                 <BarChart3 className="w-4 h-4 mr-2" />
                 Relatório
               </Button>
@@ -231,7 +234,7 @@ const RecolhaNF = () => {
                               <ArrowRight className="w-4 h-4 ml-1" />
                             </Button>
                           )}
-                          <Button variant="outline" size="sm">
+                          <Button variant="outline" size="sm" onClick={() => setSelectedNF(nf.id)}>
                             <Eye className="w-4 h-4 mr-1" />
                             Ver
                           </Button>
@@ -341,6 +344,157 @@ const RecolhaNF = () => {
           </Tabs>
         </CardContent>
       </Card>
+
+      {/* Dialog - Visualizar NF */}
+      <Dialog open={!!selectedNF} onOpenChange={() => setSelectedNF(null)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Nota Fiscal {selectedNF}
+            </DialogTitle>
+            <DialogDescription>Detalhes completos da nota fiscal</DialogDescription>
+          </DialogHeader>
+          {(() => {
+            const nf = notasFiscais.find(n => n.id === selectedNF);
+            if (!nf) return null;
+            return (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Número</p>
+                    <p className="font-medium">{nf.id}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Status</p>
+                    {getStatusBadge(nf.status)}
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Cliente</p>
+                    <p className="font-medium">{nf.cliente}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Data de Emissão</p>
+                    <p className="font-medium">{nf.data}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Valor</p>
+                    <p className="font-semibold text-lg">{nf.valor}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">XML Anexado</p>
+                    {nf.xml ? (
+                      <Badge variant="secondary" className="bg-accent/15 text-accent">
+                        <CheckCircle className="w-3 h-3 mr-1" /> Sim
+                      </Badge>
+                    ) : (
+                      <Badge variant="destructive">
+                        <X className="w-3 h-3 mr-1" /> Não
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Chave de Acesso</p>
+                  <p className="text-xs font-mono bg-muted p-2 rounded break-all">
+                    3524 0108 7654 3210 0012 5500 1000 0000 {nf.id.replace("NF", "")} 1234 5678 9012
+                  </p>
+                </div>
+                <div className="flex gap-2 pt-2">
+                  {!nf.xml && (
+                    <Button variant="outline" size="sm">
+                      <Upload className="w-4 h-4 mr-1" /> Anexar XML
+                    </Button>
+                  )}
+                  {nf.status === "pendente" && (
+                    <Button size="sm" onClick={() => { handleEnviarNF(nf.id); setSelectedNF(null); }}>
+                      Enviar <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog - Relatório */}
+      <Dialog open={reportOpen} onOpenChange={setReportOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5" />
+              Relatório de Notas Fiscais
+            </DialogTitle>
+            <DialogDescription>Resumo operacional do período</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6">
+            {/* Resumo */}
+            <div className="grid grid-cols-3 gap-4">
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <p className="text-sm text-muted-foreground">Total NFs</p>
+                  <p className="text-2xl font-bold">{notasFiscais.length}</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <p className="text-sm text-muted-foreground">Enviadas</p>
+                  <p className="text-2xl font-bold text-accent">
+                    {notasFiscais.filter(n => n.status === "enviada" || n.status === "validada").length}
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <p className="text-sm text-muted-foreground">Pendentes</p>
+                  <p className="text-2xl font-bold text-destructive">
+                    {notasFiscais.filter(n => n.status === "pendente").length}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Valor total */}
+            <Card>
+              <CardContent className="p-4">
+                <p className="text-sm text-muted-foreground mb-1">Valor Total Faturado</p>
+                <p className="text-3xl font-bold">R$ 8.491,45</p>
+                <div className="mt-3 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Conciliado</span>
+                    <span className="font-medium text-accent">R$ 6.140,75 (72%)</span>
+                  </div>
+                  <Progress value={72} className="h-2" />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Detalhamento */}
+            <div>
+              <h4 className="font-medium mb-3">Detalhamento por NF</h4>
+              <div className="space-y-2">
+                {notasFiscais.map(nf => (
+                  <div key={nf.id} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <FileText className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">{nf.id} — {nf.cliente}</p>
+                        <p className="text-xs text-muted-foreground">{nf.data}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-medium">{nf.valor}</span>
+                      {getStatusBadge(nf.status)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
