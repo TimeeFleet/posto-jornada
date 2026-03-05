@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
@@ -71,10 +72,21 @@ const menuItems = [
   },
 ];
 
+// Módulos que o Caixa pode acessar
+const caixaAllowedPaths = ["/dashboard/abastecimento", "/dashboard/recolha-nf"];
+
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const { role, isGerente, isCaixa, loading } = useUserRole();
+
+  const filteredMenuItems = useMemo(() => {
+    if (isCaixa) {
+      return menuItems.filter(item => caixaAllowedPaths.includes(item.path));
+    }
+    return menuItems;
+  }, [isCaixa]);
 
   const isDashboardHome = location.pathname === "/dashboard/home";
 
@@ -118,7 +130,7 @@ const Dashboard = () => {
         {/* Navigation */}
         <ScrollArea className="flex-1 p-2">
           <div className="space-y-1">
-            {menuItems.map((item, index) => {
+            {filteredMenuItems.map((item, index) => {
               const isActive = location.pathname === item.path;
               return (
                 <Button
@@ -181,7 +193,7 @@ const Dashboard = () => {
           <div>
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-semibold text-foreground">
-                {isDashboardHome ? "Dashboard Principal" : menuItems.find(item => location.pathname === item.path)?.title}
+                {isDashboardHome ? "Dashboard Principal" : filteredMenuItems.find(item => location.pathname === item.path)?.title}
               </h1>
               {!isDashboardHome && (
                 <Button
